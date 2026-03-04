@@ -67,47 +67,61 @@ npm run build
 ### User Screens
 
 #### Home Page
+
 ![Home Page](docs/screenshots/UserSS/Home%20Page.png)
 
 #### Product Page
+
 ![Product Page](docs/screenshots/UserSS/Product%20Page.png)
 
 #### Product Details
+
 ![Product Details](docs/screenshots/UserSS/Product%20Details.png)
 
 #### Cart
+
 ![Cart](docs/screenshots/UserSS/Cart.png)
 
 #### Sign In
+
 ![Sign In](docs/screenshots/UserSS/Sign%20In.png)
 
 #### Sign Up
+
 ![Sign Up](docs/screenshots/UserSS/SignUp.png)
 
 #### User Profile
+
 ![User Profile](docs/screenshots/UserSS/UserProfile.png)
 
 ### Admin Screens
 
 #### Admin Login
+
 ![Admin Login](docs/screenshots/AdminSS/Admin%20Login.png)
 
 #### Admin Dashboard
+
 ![Admin Dashboard](docs/screenshots/AdminSS/Admin%20Dashboard.png)
 
 #### Manage Product
+
 ![Manage Product](docs/screenshots/AdminSS/Manage%20Product.png)
 
 #### Manage Orders
+
 ![Manage Orders](docs/screenshots/AdminSS/Manage%20Orders.png)
 
 #### Manage Users
+
 ![Manage Users](docs/screenshots/AdminSS/Manage%20Users.png)
 
 #### Manage Admin
+
 ![Manage Admin](docs/screenshots/AdminSS/Manage%20Admin.png)
 
 #### Admin Profile
+
 ![Admin Profile](docs/screenshots/AdminSS/Admin%20Profile.png)
 
 ## Keeping README Updated After Major Product Changes
@@ -117,9 +131,6 @@ When major product changes happen (product card layout, product details UI, prod
 - `docs/screenshots/UserSS/Product Page.png`
 - `docs/screenshots/UserSS/Product Details.png`
 - `docs/screenshots/AdminSS/Manage Product.png`
-
-Important: keep the same file names when replacing images.  
-Because README links point to these paths, new screenshots will show automatically after commit/push.
 
 ## Author
 
