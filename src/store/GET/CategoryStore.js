@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-
-const URL = import.meta.env.VITE_API_URL;
+import { API_BASE_URL } from '../../utils/apiConfig';
 
 export const useCategoryStore = defineStore('CategoryStore', {
   state: () => ({
@@ -17,10 +16,17 @@ export const useCategoryStore = defineStore('CategoryStore', {
       this.errors = null;
 
       try {
-        const response = await axios.get(`${URL}/products/categories`);
-        this.category = response.data;
+        const response = await axios.get(`${API_BASE_URL}/products`);
+
+        if (!Array.isArray(response.data)) {
+          throw new Error('Unexpected categories response format.');
+        }
+
+        this.category = [
+          ...new Set(response.data.map((product) => product?.category)),
+        ].filter(Boolean);
       } catch (err) {
-        this.errors = err.message;
+        this.errors = err.message || 'Failed to load categories.';
       } finally {
         this.loading = false;
       }
@@ -28,14 +34,25 @@ export const useCategoryStore = defineStore('CategoryStore', {
 
     async fetchProductByCategory(endpoint) {
       this.loading = true;
-      this.error = null;
+      this.errors = null;
+      this.productByCategory = [];
+
       try {
-        const response = await axios.get(
-          `${URL}/products/category/${endpoint}`
+        const categoryName = decodeURIComponent(endpoint);
+        const response = await axios.get(`${API_BASE_URL}/products`, {
+          params: { category: categoryName },
+        });
+
+        if (!Array.isArray(response.data)) {
+          throw new Error('Unexpected products response format.');
+        }
+
+        this.productByCategory = response.data.filter(
+          (product) => product?.category === categoryName
         );
-        this.productByCategory = response.data;
       } catch (err) {
-        this.errors = err.message;
+        this.errors =
+          err.message || 'Failed to load products for this category.';
       } finally {
         this.loading = false;
       }

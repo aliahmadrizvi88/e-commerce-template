@@ -23,7 +23,7 @@ const handleLogin = async () => {
     showToast(`Logged in as ${credentials.value.email}`, 'success');
     router.push('/admin');
   } catch (error) {
-    errorMessage.value = adminStore.errors;
+    errorMessage.value = adminStore.error || 'Invalid administrator credentials.';
     showToast(`Login Failed: ${errorMessage.value}!`, 'error');
   }
 };
@@ -60,7 +60,7 @@ const handleLogin = async () => {
       type="submit"
       class="bg-black w-60 text-white rounded-2xl py-2 hover:shadow-2xl/30 duration-300 cursor-pointer font-semibold"
     >
-      {{ adminStore.loading ? 'LOGING IN...' : 'LOGIN' }}
+      {{ adminStore.loading ? 'LOGGING IN...' : 'LOGIN' }}
     </button>
   </form>
 </template>

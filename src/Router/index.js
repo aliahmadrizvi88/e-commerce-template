@@ -82,8 +82,8 @@ const routes = [
     component: Auth,
     children: [
       { path: 'adminLogin', name: 'AdminLogin', component: AdminLogin },
-      { path: 'login', name: 'login', component: Login },
-      { path: 'signUp', name: 'signup', component: SignUp },
+      { path: 'login', name: 'UserLogin', component: Login },
+      { path: 'signUp', name: 'UserSignup', component: SignUp },
     ],
   },
 ];
@@ -109,7 +109,10 @@ router.beforeEach((to, from, next) => {
     return next({ name: 'UserLogin' });
   }
 
-  const isAuthRoute = to.name === 'UserLogin' || to.name === 'AdminLogin';
+  const isAuthRoute =
+    to.name === 'UserLogin' ||
+    to.name === 'UserSignup' ||
+    to.name === 'AdminLogin';
   if (authStore.isAuthenticated && isAuthRoute) {
     return next(
       authStore.isAdmin ? { name: 'AdminDashboard' } : { name: 'Home' }

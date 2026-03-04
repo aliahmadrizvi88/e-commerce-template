@@ -439,6 +439,28 @@
       },
       "phone": "1-104-001-4567",
       "__v": 0
+    },
+    {
+      "id": "1736",
+      "email": "aliahmadrizvi18@gmail.com",
+      "password": "12345678",
+      "username": "Quasi consequuntur q",
+      "name": {
+        "firstname": "Impedit quaerat sed",
+        "lastname": "Eos nostrum mollit q"
+      },
+      "phone": "Aut numquam necessit",
+      "address": {
+        "city": "Explicabo Sit non ",
+        "street": "Expedita pariatur D",
+        "zipcode": "Sapiente repellendus",
+        "number": 38,
+        "geolocation": {
+          "lat": "0",
+          "long": "0"
+        }
+      },
+      "__v": 0
     }
   ],
   "orders": [

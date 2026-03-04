@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useAuthStore } from '../AuthStore';
+import { API_BASE_URL } from '../../utils/apiConfig';
 
-const URL = import.meta.env.VITE_LOCAL_API_URL;
+const URL = API_BASE_URL;
 
 const generateAdminUsername = (name) => {
   const parts = name

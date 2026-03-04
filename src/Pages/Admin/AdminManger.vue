@@ -4,12 +4,13 @@ import { useAuthStore } from '../../store/AuthStore';
 import { useAdminStore } from '../../store/GET/AdminStore';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { API_BASE_URL } from '../../utils/apiConfig';
 
 import UniDailogue from '../../components/UniDailogue.vue';
 import { showToast } from '../../utils/Toast';
 import Uni_table from '../../components/Admin/Uni_table.vue';
 
-const URL = import.meta.env.VITE_LOCAL_API_URL;
+const URL = API_BASE_URL;
 
 const authStore = useAuthStore();
 const adminStore = useAdminStore();

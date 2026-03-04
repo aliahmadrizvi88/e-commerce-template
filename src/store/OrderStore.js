@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 import { defineStore } from 'pinia';
+import { API_BASE_URL } from '../utils/apiConfig';
 
-const URL = import.meta.env.VITE_LOCAL_API_URL;
+const URL = API_BASE_URL;
 
 export const useOrderStore = defineStore('orders', {
   state: () => ({

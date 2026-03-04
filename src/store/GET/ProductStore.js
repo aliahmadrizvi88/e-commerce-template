@@ -1,26 +1,41 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
-
-const URL = import.meta.env.VITE_LOCAL_API_URL;
+import { API_BASE_URL } from '../../utils/apiConfig';
 
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     products: [],
     productDetails: null,
+    error: null,
     errors: null,
     loading: false,
   }),
 
   actions: {
+    setError(message) {
+      this.error = message;
+      this.errors = message;
+    },
+
+    clearError() {
+      this.error = null;
+      this.errors = null;
+    },
+
     async fetchProduct() {
       this.loading = true;
-      this.errors = null;
+      this.clearError();
 
       try {
-        const response = await axios.get(`${URL}/products`);
+        const response = await axios.get(`${API_BASE_URL}/products`);
+
+        if (!Array.isArray(response.data)) {
+          throw new Error('Unexpected products response format.');
+        }
+
         this.products = response.data;
       } catch (err) {
-        this.error = err.message;
+        this.setError(err.message || 'Failed to load products.');
       } finally {
         this.loading = false;
       }
@@ -29,7 +44,7 @@ export const useProductStore = defineStore('productStore', {
     //Fetch Product Details
     async fetchProductDetails(id) {
       this.loading = true;
-      this.error = null;
+      this.clearError();
       this.productDetails = null;
 
       try {
@@ -40,11 +55,11 @@ export const useProductStore = defineStore('productStore', {
         if (localProduct) {
           this.productDetails = localProduct;
         } else {
-          const response = await axios.get(`${URL}/products/${id}`);
+          const response = await axios.get(`${API_BASE_URL}/products/${id}`);
           this.productDetails = response.data;
         }
       } catch (err) {
-        this.errors = 'Failed to load product details';
+        this.setError('Failed to load product details.');
       } finally {
         this.loading = false;
       }
@@ -52,8 +67,8 @@ export const useProductStore = defineStore('productStore', {
 
     //Add New Product
     async addProduct(newProduct) {
-      this.loading = false;
-      this.errors = null;
+      this.loading = true;
+      this.clearError();
 
       const productPayload = {
         ...newProduct,
@@ -61,11 +76,14 @@ export const useProductStore = defineStore('productStore', {
       };
 
       try {
-        const response = await axios.post(`${URL}/products`, productPayload);
+        const response = await axios.post(
+          `${API_BASE_URL}/products`,
+          productPayload
+        );
         const productWithId = response.data;
         this.products.push(productWithId);
       } catch (err) {
-        this.errors = 'Failed to add product.';
+        this.setError('Failed to add product.');
       } finally {
         this.loading = false;
       }
@@ -74,11 +92,11 @@ export const useProductStore = defineStore('productStore', {
     //Edit Existing Product:
     async editProduct(updatedProduct) {
       this.loading = true;
-      this.errors = null;
+      this.clearError();
 
       try {
         const response = await axios.patch(
-          `${URL}/products/${updatedProduct.id}`,
+          `${API_BASE_URL}/products/${updatedProduct.id}`,
           updatedProduct
         );
 
@@ -90,7 +108,7 @@ export const useProductStore = defineStore('productStore', {
           this.products[index] = savedProduct;
         }
       } catch (err) {
-        this.errors = err.message;
+        this.setError(err.message || 'Failed to update product.');
       } finally {
         this.loading = false;
       }
@@ -99,14 +117,14 @@ export const useProductStore = defineStore('productStore', {
     //deleteProducts
     async deleteProduct(id) {
       this.loading = true;
-      this.errors = null;
+      this.clearError();
 
       try {
-        await axios.delete(`${URL}/products/${id}`);
+        await axios.delete(`${API_BASE_URL}/products/${id}`);
 
         this.products = this.products.filter((item) => item.id !== id);
       } catch (err) {
-        this.errors = 'Failed to delete product.';
+        this.setError('Failed to delete product.');
       } finally {
         this.loading = false;
       }
