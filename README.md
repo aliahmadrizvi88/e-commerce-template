@@ -124,14 +124,6 @@ npm run build
 
 ![Admin Profile](docs/screenshots/AdminSS/Admin%20Profile.png)
 
-## Keeping README Updated After Major Product Changes
-
-When major product changes happen (product card layout, product details UI, product flow, or admin product management), update screenshots in these files:
-
-- `docs/screenshots/UserSS/Product Page.png`
-- `docs/screenshots/UserSS/Product Details.png`
-- `docs/screenshots/AdminSS/Manage Product.png`
-
 ## Author
 
 Ali Ahmad  
